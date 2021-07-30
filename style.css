@@ -1,19 +1,33 @@
 .dice {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    flex-wrap: wrap;
     width: 10rem;
     height: 10rem;
     border: 0.4rem solid black;
     border-radius: 10%;
 }
 
+.six-dice {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.two-dice {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: space-between;
+}
+
 .dot {
-    background-color: black;
+    border: 1rem solid black;
     border-radius: 50%;
-    width: 2rem;
-    height: 2rem;
     margin: 5%;
+}
+
+div.two-dice > div:first-child  {
+    justify-self: flex-start;
+    margin-bottom: 75%;
 }
