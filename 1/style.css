@@ -16,11 +16,11 @@
     align-items: center;
     height: 200%;
     width: 25%;
-    padding: 0.5rem 0;
+    padding: 0.7rem 0;
 }
 
 .dot {
-    border: 2.2vh solid black;
+    border: 2.1vh solid black;
     border-radius: 50%;
     margin: 3%;
     width: 0;
@@ -47,4 +47,19 @@
 
 div.two-dice > div:nth-child(3) {
     justify-content: flex-end;
+}
+
+.five-dice {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.five-dice .column {
+    justify-content: space-between;
+}
+
+div.five-dice > div:nth-child(2) {
+    justify-content: center;
 }
