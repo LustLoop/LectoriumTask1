@@ -4,6 +4,7 @@
     flex-direction: column;
     align-content: center;
     align-items: center;
+    justify-content: center;
     width: 18vh;
     height: 18vh;
     border: 1vh solid black;
@@ -27,33 +28,12 @@
     height: 0;
 }
 
-.six-dice {
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
 .six-dice .column {
     justify-content: space-between;
 }
 
-.two-dice {
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    align-content: center;
-}
-
 div.two-dice > div:nth-child(3) {
     justify-content: flex-end;
-}
-
-.five-dice {
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
 }
 
 .five-dice .column {
@@ -64,13 +44,6 @@ div.five-dice > div:nth-child(2) {
     justify-content: center;
 }
 
-.three-dice {
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
 div.three-dice > div:nth-child(2) {
     justify-content: center;
 }
@@ -79,22 +52,8 @@ div.three-dice > div:nth-child(3) {
     justify-content: flex-end;
 }
 
-.four-dice {
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-}
-
 .four-dice .column {
     justify-content: space-between;
-}
-
-.one-dice {
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
 }
 
 .one-dice .column {
