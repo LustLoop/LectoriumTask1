@@ -1,0 +1,50 @@
+.dice {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    width: 18vh;
+    height: 18vh;
+    border: 1vh solid black;
+    border-radius: 20%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 200%;
+    width: 25%;
+    padding: 0.5rem 0;
+}
+
+.dot {
+    border: 2.2vh solid black;
+    border-radius: 50%;
+    margin: 3%;
+    width: 0;
+    height: 0;
+}
+
+.six-dice {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.six-dice .column {
+    justify-content: space-between;
+}
+
+.two-dice {
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    align-content: center;
+}
+
+div.two-dice > div:nth-child(3) {
+    justify-content: flex-end;
+}
