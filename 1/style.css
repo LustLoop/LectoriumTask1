@@ -78,3 +78,14 @@ div.three-dice > div:nth-child(2) {
 div.three-dice > div:nth-child(3) {
     justify-content: flex-end;
 }
+
+.four-dice {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.four-dice .column {
+    justify-content: space-between;
+}
