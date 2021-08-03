@@ -63,3 +63,18 @@ div.two-dice > div:nth-child(3) {
 div.five-dice > div:nth-child(2) {
     justify-content: center;
 }
+
+.three-dice {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+div.three-dice > div:nth-child(2) {
+    justify-content: center;
+}
+
+div.three-dice > div:nth-child(3) {
+    justify-content: flex-end;
+}
