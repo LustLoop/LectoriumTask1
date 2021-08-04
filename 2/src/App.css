@@ -1,3 +1,5 @@
+
+
 .container {
     width: 25%;
     margin: 0 auto;
@@ -8,6 +10,7 @@ input, button, a {
 }
 
 h1 {
+    font-size: 3vh;
     text-align: center;
     color: #576BCD;
 }
@@ -18,17 +21,19 @@ form {
 }
 
 h2 {
+    font-size: 2.5vh;
     margin: 0;
 }
 
 label {
     display: block;
     margin: 5% 0;
-    font-size: 12pt;
+    font-size: 1.8vh;
     font-weight: bold;
 }
 
 a {
+    font-size: 1.8vh;
     text-decoration: none;
 }
 
@@ -37,17 +42,19 @@ label > a {
 }
 
 input[type=checkbox] {
-    width: auto;
-    height: auto;
-    margin-right: 1vh;
+    width: 1.5vh;
+    height: 1.5vh;
+    margin: 0 1vh 0 0;
 }
 
 input {
+    box-sizing: border-box;
     width: 100%;
     border: 1px solid lightgray;
     border-radius: 2px;
     height: 4vh;
     margin: 1vh 0;
+    padding: 0 1.5vh;
 }
 
 .field-input:focus {
@@ -68,5 +75,6 @@ button {
 }
 
 p {
+    font-size: 1.8vh;
     text-align: center;
 }
