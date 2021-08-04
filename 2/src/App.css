@@ -57,10 +57,22 @@ input {
     padding: 0 1.5vh;
 }
 
-.field-input:focus {
-    border-color: #91A6FA;
+.valid-field-input:focus {
+    border-color: #CFD4EF;
     outline: none;
     box-shadow: 0 0 0 1px #CFD4EF;
+}
+
+.invalid-field-input {
+    border-color: #FF6E64;
+    outline: none;
+    box-shadow: 0 0 0 1px #FF6E64;
+}
+
+.invalid-field-input:focus {
+    border-color: #FF6E64;
+    outline: none;
+    box-shadow: 0 0 0 1px #FF6E64;
 }
 
 button {
@@ -77,4 +89,8 @@ button {
 p {
     font-size: 1.8vh;
     text-align: center;
+}
+
+.invalid {
+    background: red;
 }
