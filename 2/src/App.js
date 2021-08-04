@@ -14,7 +14,7 @@ class App extends Component {
                     </label>
                     <label>
                         Password
-                        <p>Forgot your password?</p>
+                        <a href="https://www.google.com/">Forgot your password?</a>
                         <input className="field-input" type="password" />
                     </label>
                     <label>
@@ -22,9 +22,9 @@ class App extends Component {
                         Stay signed in for a week
                     </label>
                     <button>Continue</button>
-                    <p>Use single sign-on (Google) instead</p>
-                    <p>Don't have an account? <a href="/">Sign up</a></p>
+                    <p><a href="https://www.google.com.ua/maps">Use single sign-on (Google) instead</a></p>
                 </form>
+                <p>Don't have an account? <a href="https://uk-ua.facebook.com/">Sign up</a></p>
             </div>
         )
     }

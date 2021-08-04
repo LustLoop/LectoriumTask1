@@ -1,38 +1,72 @@
-.App {
-  text-align: center;
+.container {
+    width: 25%;
+    margin: 0 auto;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input, button, a {
+    cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+    text-align: center;
+    color: #576BCD;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+form {
+    box-shadow: 0 0.1rem 0.5rem lightgray;
+    padding: 10%;
 }
 
-.App-link {
-  color: #61dafb;
+h2 {
+    margin: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+label {
+    display: block;
+    margin: 5% 0;
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+label > a {
+    float: right;
+}
+
+input[type=checkbox] {
+    width: auto;
+    height: auto;
+    margin-right: 1vh;
+}
+
+input {
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    height: 4vh;
+    margin: 1vh 0;
+}
+
+.field-input:focus {
+    border-color: #91A6FA;
+    outline: none;
+    box-shadow: 0 0 0 1px #CFD4EF;
+}
+
+button {
+    width: 100%;
+    height: 4vh;
+    color: white;
+    background: #576BCD;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.5vh;
+}
+
+p {
+    text-align: center;
 }
