@@ -17,9 +17,15 @@ function createMatrix(matrixWidth, matrixHeight) {
     return matrix;
 }
 
-function startIterating(matrix, matrixWidth, matrixHeight, currentHorizontalIndex, currentVerticalIndex, initialDirection) {
+function startIterating(matrix, matrixWidth, matrixHeight, curHorizontalIndex, curVerticalIndex, initialDirection) {
     let resultArray = [];
+
     let stepsLeft = matrixWidth * matrixHeight;
+    let stepLength = 1;
+    let iterationsToIncreaseStepLength = 2;
+    let indexesOutOfBorderHorizontally = 0;
+    let indexesOutOfBorderVertically = 0;
+
     switch (initialDirection) {
         case 'right':
             moveRight();
@@ -30,46 +36,92 @@ function startIterating(matrix, matrixWidth, matrixHeight, currentHorizontalInde
         case 'up':
             moveUp();
     }
+
     while (stepsLeft !== 0) {
-        moveLeft();
-        moveUp();
         moveRight();
         moveDown();
+        moveLeft();
+        moveUp();
     }
 
     console.log(resultArray)
 
     function moveLeft() {
-        if (currentHorizontalIndex !== 0 && stepsLeft !== 0) {
-            resultArray.push(matrix[currentVerticalIndex][currentHorizontalIndex])
-            currentHorizontalIndex--;
-            stepsLeft = stepsLeft - 1;
+        for (let i = 1; i <= stepLength; i++) {
+            if (stepsLeft !== 0) {
+                if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
+                    resultArray.push(matrix[curVerticalIndex][curHorizontalIndex]);
+                    stepsLeft--;
+                }
+                curHorizontalIndex--;
+            }
+        }
+        iterationsToIncreaseStepLength--;
+        if (iterationsToIncreaseStepLength === 0) {
+            iterationsToIncreaseStepLength = 2;
+            stepLength++;
         }
     }
 
     function moveUp() {
-        if (currentVerticalIndex !== 0 && stepsLeft !== 0) {
-            resultArray.push(matrix[currentVerticalIndex][currentHorizontalIndex])
-            currentVerticalIndex--;
-            stepsLeft--;
+        for (let i = 1; i <= stepLength; i++) {
+            if (stepsLeft !== 0) {
+                if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
+                    console.log(curVerticalIndex + " " + curHorizontalIndex);
+                    resultArray.push(matrix[curVerticalIndex][curHorizontalIndex]);
+                    stepsLeft--;
+                }
+                curVerticalIndex--;
+            }
+        }
+        iterationsToIncreaseStepLength--;
+        if (iterationsToIncreaseStepLength === 0) {
+            iterationsToIncreaseStepLength = 2;
+            stepLength++;
         }
     }
 
     function moveRight() {
-        if (currentHorizontalIndex !== matrixWidth - 1 && stepsLeft !== 0) {
-            resultArray.push(matrix[currentVerticalIndex][currentHorizontalIndex])
-            currentHorizontalIndex++;
-            stepsLeft--;
+        for (let i = 1; i <= stepLength; i++) {
+            if (stepsLeft !== 0) {
+                if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
+                    resultArray.push(matrix[curVerticalIndex][curHorizontalIndex]);
+                    stepsLeft--;
+                }
+                curHorizontalIndex++;
+            }
+        }
+        iterationsToIncreaseStepLength--;
+        if (iterationsToIncreaseStepLength === 0) {
+            iterationsToIncreaseStepLength = 2;
+            stepLength++;
         }
     }
 
     function moveDown() {
-        if (currentHorizontalIndex !== matrixHeight - 1 && stepsLeft !== 0) {
-            resultArray.push(matrix[currentVerticalIndex][currentHorizontalIndex])
-            currentVerticalIndex++;
-            stepsLeft--;
+        for (let i = 1; i <= stepLength; i++) {
+            if (stepsLeft !== 0) {
+                if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
+                    resultArray.push(matrix[curVerticalIndex][curHorizontalIndex]);
+                    stepsLeft--;
+                }
+                curVerticalIndex++;
+            }
+        }
+        iterationsToIncreaseStepLength--;
+        if (iterationsToIncreaseStepLength === 0) {
+            iterationsToIncreaseStepLength = 2;
+            stepLength++;
         }
     }
+}
+
+function checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth) {
+    if (curVerticalIndex < 0 || curVerticalIndex >= matrixHeight ||
+        curHorizontalIndex < 0 || curHorizontalIndex >= matrixWidth) {
+        return false;
+    }
+    return true;
 }
 
 moveSpirally(5, 6, 2, 4, 'left')
