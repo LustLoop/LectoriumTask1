@@ -1,6 +1,6 @@
 function moveSpirally(matrixWidth, matrixHeight, horizontalStartPoint, verticalStartPoint, initDirection) {
-    const matrix = createMatrix(matrixWidth, matrixHeight)
-    startIterating(matrixWidth, matrixHeight, horizontalStartPoint - 1, verticalStartPoint - 1, 'left')
+    const matrix = createMatrix(matrixWidth, matrixHeight);
+    startIterating(matrix, matrixWidth, matrixHeight, horizontalStartPoint - 1, verticalStartPoint - 1, 'left');
 }
 
 function createMatrix(matrixWidth, matrixHeight) {
@@ -17,52 +17,58 @@ function createMatrix(matrixWidth, matrixHeight) {
     return matrix;
 }
 
-function testqwe(matrix) {
-    console.log(matrix[4-1][2-1])
-}
-
-function startIterating(matrixWidth, matrixHeight, currentHorizontalIndex, currentVerticalIndex, initialDirection) {
+function startIterating(matrix, matrixWidth, matrixHeight, currentHorizontalIndex, currentVerticalIndex, initialDirection) {
+    let resultArray = [];
     let stepsLeft = matrixWidth * matrixHeight;
-    do {
-        switch (initialDirection) {
-            case 'right':
-                moveRight();
-            case 'down':
-                moveDown();
-            case 'left':
-                moveLeft();
-            case 'up':
-                moveUp();
-        }
-    } while (stepsLeft !== 0) {
-        moveRight(currentHorizontalIndex, currentVerticalIndex);
-        moveDown(currentHorizontalIndex, currentVerticalIndex);
-        moveLeft(currentHorizontalIndex, currentVerticalIndex);
-        moveUp(currentHorizontalIndex, currentVerticalIndex);
+    switch (initialDirection) {
+        case 'right':
+            moveRight();
+        case 'down':
+            moveDown();
+        case 'left':
+            moveLeft();
+        case 'up':
+            moveUp();
+    }
+    while (stepsLeft !== 0) {
+        moveLeft();
+        moveUp();
+        moveRight();
+        moveDown();
     }
 
+    console.log(resultArray)
+
     function moveLeft() {
-        increaseCounter();
+        if (currentHorizontalIndex !== 0 && stepsLeft !== 0) {
+            resultArray.push(matrix[currentVerticalIndex][currentHorizontalIndex])
+            currentHorizontalIndex--;
+            stepsLeft = stepsLeft - 1;
+        }
     }
 
     function moveUp() {
-        increaseCounter();
+        if (currentVerticalIndex !== 0 && stepsLeft !== 0) {
+            resultArray.push(matrix[currentVerticalIndex][currentHorizontalIndex])
+            currentVerticalIndex--;
+            stepsLeft--;
+        }
     }
 
     function moveRight() {
-        increaseCounter();
+        if (currentHorizontalIndex !== matrixWidth - 1 && stepsLeft !== 0) {
+            resultArray.push(matrix[currentVerticalIndex][currentHorizontalIndex])
+            currentHorizontalIndex++;
+            stepsLeft--;
+        }
     }
 
     function moveDown() {
-        increaseCounter();
-    }
-
-    function increaseCounter() {
-        if (stepsLeft === 0) {
-            return;
+        if (currentHorizontalIndex !== matrixHeight - 1 && stepsLeft !== 0) {
+            resultArray.push(matrix[currentVerticalIndex][currentHorizontalIndex])
+            currentVerticalIndex++;
+            stepsLeft--;
         }
-        console.log(stepsLeft)
-        stepsLeft--;
     }
 }
 
