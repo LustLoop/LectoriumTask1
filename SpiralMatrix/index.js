@@ -66,53 +66,47 @@ function getResultOfIterations(matrix, matrixWidth, matrixHeight, curHorizontalI
 
     function moveLeft() {
         for (let i = 1; i <= stepLength; i++) {
-            if (stepsLeft !== 0) {
-                if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
-                    addStepToTheFinalArray();
-                }
-                curHorizontalIndex--;
-            }
+            let stepWasMade = makeAStepIfPossible();
+            stepWasMade ? curHorizontalIndex-- : null;
         }
         updateIterationsData();
     }
 
     function moveUp() {
         for (let i = 1; i <= stepLength; i++) {
-            if (stepsLeft !== 0) {
-                if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
-                    addStepToTheFinalArray();
-                }
-                curVerticalIndex--;
-            }
+            let stepWasMade = makeAStepIfPossible();
+            stepWasMade ? curVerticalIndex-- : null;
         }
         updateIterationsData();
     }
 
     function moveRight() {
         for (let i = 1; i <= stepLength; i++) {
-            if (stepsLeft !== 0) {
-                if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
-                    addStepToTheFinalArray();
-                }
-                curHorizontalIndex++;
-            }
+            let stepWasMade = makeAStepIfPossible();
+            stepWasMade ? curHorizontalIndex++ : null;
         }
         updateIterationsData();
     }
 
     function moveDown() {
         for (let i = 1; i <= stepLength; i++) {
-            if (stepsLeft !== 0) {
-                if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
-                    addStepToTheFinalArray();
-                }
-                curVerticalIndex++;
-            }
+            let stepWasMade = makeAStepIfPossible();
+            stepWasMade ? curVerticalIndex++ : null;
         }
         updateIterationsData();
     }
 
-    function addStepToTheFinalArray() {
+    function makeAStepIfPossible() {
+        if (stepsLeft !== 0) {
+            if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
+                addElementToTheFinalArray();
+            }
+            return true;
+        }
+        return false;
+    }
+
+    function addElementToTheFinalArray() {
         resultArray.push(matrix[curVerticalIndex][curHorizontalIndex]);
         stepsLeft--;
     }
@@ -134,4 +128,4 @@ function checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeigh
 
 }
 
-console.log(moveSpirally(5, 6, 2, 4, 'left', 'counterclockwise'));
+console.log(moveSpirally(5, 6, 2, 4, 'left', 'clockwise'));
