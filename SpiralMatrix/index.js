@@ -1,7 +1,7 @@
-function moveSpirally(matrixWidth, matrixHeight, horizontalStartPoint, verticalStartPoint, initDirection) {
+function moveSpirally(matrixWidth, matrixHeight, horizontalStartPoint, verticalStartPoint, initDirection, spiralType) {
     const matrix = createMatrix(matrixWidth, matrixHeight);
-    return startIterating(matrix, matrixWidth, matrixHeight, horizontalStartPoint - 1,
-        verticalStartPoint - 1, initDirection);
+    return getResultOfIterations(matrix, matrixWidth, matrixHeight, horizontalStartPoint - 1,
+        verticalStartPoint - 1, initDirection, spiralType);
 }
 
 function createMatrix(matrixWidth, matrixHeight) {
@@ -18,32 +18,51 @@ function createMatrix(matrixWidth, matrixHeight) {
     return matrix;
 }
 
-function startIterating(matrix, matrixWidth, matrixHeight, curHorizontalIndex, curVerticalIndex, initialDirection) {
+function getResultOfIterations(matrix, matrixWidth, matrixHeight, curHorizontalIndex,
+                               curVerticalIndex, initialDirection, spiralType) {
     let resultArray = [];
 
     let stepsLeft = matrixWidth * matrixHeight;
     let stepLength = 1;
     let iterationsToIncreaseStepLength = 2;
 
-    switch (initialDirection) {
-        case 'right':
+    if (spiralType === 'clockwise') {
+        switch (initialDirection) {
+            case 'right':
+                moveRight();
+            case 'down':
+                moveDown();
+            case 'left':
+                moveLeft();
+            case 'up':
+                moveUp();
+        }
+
+        while (stepsLeft !== 0) {
             moveRight();
-        case 'down':
             moveDown();
-        case 'left':
             moveLeft();
-        case 'up':
             moveUp();
-    }
+        }
+    } else if (spiralType === "counterclockwise") {
+        switch (initialDirection) {
+            case 'left':
+                moveLeft();
+            case 'down':
+                moveDown();
+            case 'right':
+                moveRight();
+            case 'up':
+                moveUp();
+        }
 
-    while (stepsLeft !== 0) {
-        moveRight();
-        moveDown();
-        moveLeft();
-        moveUp();
+        while (stepsLeft !== 0) {
+            moveLeft();
+            moveDown();
+            moveRight();
+            moveUp();
+        }
     }
-
-    return(resultArray)
 
     function moveLeft() {
         for (let i = 1; i <= stepLength; i++) {
@@ -105,6 +124,8 @@ function startIterating(matrix, matrixWidth, matrixHeight, curHorizontalIndex, c
             stepLength++;
         }
     }
+
+    return (resultArray);
 }
 
 function checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth) {
@@ -113,4 +134,4 @@ function checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeigh
 
 }
 
-console.log(moveSpirally(5, 6, 2, 4, 'left'))
+console.log(moveSpirally(5, 6, 2, 4, 'left', 'counterclockwise'));
