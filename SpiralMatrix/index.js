@@ -1,6 +1,7 @@
 function moveSpirally(matrixWidth, matrixHeight, horizontalStartPoint, verticalStartPoint, initDirection) {
     const matrix = createMatrix(matrixWidth, matrixHeight);
-    startIterating(matrix, matrixWidth, matrixHeight, horizontalStartPoint - 1, verticalStartPoint - 1, 'left');
+    return startIterating(matrix, matrixWidth, matrixHeight, horizontalStartPoint - 1,
+        verticalStartPoint - 1, initDirection);
 }
 
 function createMatrix(matrixWidth, matrixHeight) {
@@ -23,8 +24,6 @@ function startIterating(matrix, matrixWidth, matrixHeight, curHorizontalIndex, c
     let stepsLeft = matrixWidth * matrixHeight;
     let stepLength = 1;
     let iterationsToIncreaseStepLength = 2;
-    let indexesOutOfBorderHorizontally = 0;
-    let indexesOutOfBorderVertically = 0;
 
     switch (initialDirection) {
         case 'right':
@@ -44,70 +43,62 @@ function startIterating(matrix, matrixWidth, matrixHeight, curHorizontalIndex, c
         moveUp();
     }
 
-    console.log(resultArray)
+    return(resultArray)
 
     function moveLeft() {
         for (let i = 1; i <= stepLength; i++) {
             if (stepsLeft !== 0) {
                 if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
-                    resultArray.push(matrix[curVerticalIndex][curHorizontalIndex]);
-                    stepsLeft--;
+                    addStepToTheFinalArray();
                 }
                 curHorizontalIndex--;
             }
         }
-        iterationsToIncreaseStepLength--;
-        if (iterationsToIncreaseStepLength === 0) {
-            iterationsToIncreaseStepLength = 2;
-            stepLength++;
-        }
+        updateIterationsData();
     }
 
     function moveUp() {
         for (let i = 1; i <= stepLength; i++) {
             if (stepsLeft !== 0) {
                 if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
-                    console.log(curVerticalIndex + " " + curHorizontalIndex);
-                    resultArray.push(matrix[curVerticalIndex][curHorizontalIndex]);
-                    stepsLeft--;
+                    addStepToTheFinalArray();
                 }
                 curVerticalIndex--;
             }
         }
-        iterationsToIncreaseStepLength--;
-        if (iterationsToIncreaseStepLength === 0) {
-            iterationsToIncreaseStepLength = 2;
-            stepLength++;
-        }
+        updateIterationsData();
     }
 
     function moveRight() {
         for (let i = 1; i <= stepLength; i++) {
             if (stepsLeft !== 0) {
                 if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
-                    resultArray.push(matrix[curVerticalIndex][curHorizontalIndex]);
-                    stepsLeft--;
+                    addStepToTheFinalArray();
                 }
                 curHorizontalIndex++;
             }
         }
-        iterationsToIncreaseStepLength--;
-        if (iterationsToIncreaseStepLength === 0) {
-            iterationsToIncreaseStepLength = 2;
-            stepLength++;
-        }
+        updateIterationsData();
     }
 
     function moveDown() {
         for (let i = 1; i <= stepLength; i++) {
             if (stepsLeft !== 0) {
                 if (checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth)) {
-                    resultArray.push(matrix[curVerticalIndex][curHorizontalIndex]);
-                    stepsLeft--;
+                    addStepToTheFinalArray();
                 }
                 curVerticalIndex++;
             }
         }
+        updateIterationsData();
+    }
+
+    function addStepToTheFinalArray() {
+        resultArray.push(matrix[curVerticalIndex][curHorizontalIndex]);
+        stepsLeft--;
+    }
+
+    function updateIterationsData() {
         iterationsToIncreaseStepLength--;
         if (iterationsToIncreaseStepLength === 0) {
             iterationsToIncreaseStepLength = 2;
@@ -117,11 +108,9 @@ function startIterating(matrix, matrixWidth, matrixHeight, curHorizontalIndex, c
 }
 
 function checkIfNotOutOfBorder(curVerticalIndex, curHorizontalIndex, matrixHeight, matrixWidth) {
-    if (curVerticalIndex < 0 || curVerticalIndex >= matrixHeight ||
-        curHorizontalIndex < 0 || curHorizontalIndex >= matrixWidth) {
-        return false;
-    }
-    return true;
+    return !(curVerticalIndex < 0 || curVerticalIndex >= matrixHeight ||
+        curHorizontalIndex < 0 || curHorizontalIndex >= matrixWidth);
+
 }
 
-moveSpirally(5, 6, 2, 4, 'left')
+console.log(moveSpirally(5, 6, 2, 4, 'left'))
