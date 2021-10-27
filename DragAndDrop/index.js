@@ -1,27 +1,33 @@
 let field = document.querySelector('#interactive-field');
 let savedBlock = localStorage.getItem("block");
-const deleteButton = '<p id="delete-block-button">&#10006;</p>';
-const newBlock = '<div id="draggable-block" style="position: absolute">' + deleteButton + '<form onsubmit="submitName()"><input type="text"><input type="submit"></form></div>';
-let block = document.querySelector('#draggable-block');
-let nameField = document.querySelector('#block-name');
-let deleteBlockButton =  document.querySelector('#delete-block-button');
 
-window.onload = (e) => {
+const deleteButtonHtml = '<div id="delete-block-button" onclick="deleteBlock()">&#10006;</div>';
+const nameFormHtml = '<from id="block-name-form" style="display: none"><input type="text" id="block-name-field-input">' +
+    '<button onclick="submitName()">Submit</button></from>';
+const nameFieldHtml = '<div id="block-name-field" onclick="changeName()">Name</div>';
+const newBlockHtml = '<div id="draggable-block" style="position: absolute">' + deleteButtonHtml + nameFieldHtml + nameFormHtml + '</div>';
+
+let block = document.querySelector('#draggable-block');
+let deleteBlockButton;
+let nameField;
+
+window.onload = () => {
     if (savedBlock != null) {
         field.innerHTML = savedBlock;
         block = document.querySelector('#draggable-block');
         block.style.left = localStorage.getItem("shiftX");
         block.style.top = localStorage.getItem("shiftY");
-        nameField = document.querySelector('#block-name');
+        nameField = document.querySelector('#block-name-field');
+        deleteBlockButton = document.querySelector('#delete-block-button');
         setBlockQualities();
     }
 }
 
 field.addEventListener('dblclick', function (e) {
     if (savedBlock == null) {
-        savedBlock = newBlock;
+        savedBlock = newBlockHtml;
         field.innerHTML = savedBlock;
-        localStorage.setItem("block", newBlock);
+        localStorage.setItem("block", newBlockHtml);
         block = document.querySelector('#draggable-block');
         deleteBlockButton = document.querySelector('#delete-block-button');
         block.style.left = e.pageX + 'px';
@@ -33,15 +39,6 @@ field.addEventListener('dblclick', function (e) {
 });
 
 function setBlockQualities() {
-    deleteBlockButton.onclick = function () {
-        console.log('puff')
-        localStorage.clear();
-        field.removeChild(block);
-        block = null;
-        savedBlock = null;
-    }
-
-
     block.onmousedown = function(e) {
         const fieldCoords = field.getBoundingClientRect()
         let blockCoords = getCoords(block);
@@ -57,7 +54,7 @@ function setBlockQualities() {
             moveAt(e);
         }
 
-        block.onmouseup = function(e) {
+        block.onmouseup = function() {
             const blockWidth = blockCoords.right - blockCoords.left;
             const blockHeight = blockCoords.bottom - blockCoords.top;
 
@@ -104,6 +101,25 @@ function getCoords(elem) {
     };
 }
 
+function deleteBlock() {
+    localStorage.clear();
+    field.removeChild(block);
+    block = null;
+    savedBlock = null;
+}
+
 function submitName() {
-    console.log('submit')
+    const nameField = document.getElementById('block-name-field');
+    const newName = document.getElementById('block-name-field-input').value;
+    document.getElementById('block-name-form').style.display = 'none';
+    nameField.style.display = 'block';
+    nameField.innerText = newName;
+}
+
+function changeName() {
+    const nameField = document.getElementById('block-name-field');
+    const currentName = nameField.innerText;
+    nameField.style.display = 'none';
+    document.getElementById('block-name-form').style.display = 'block';
+    document.getElementById('block-name-field-input').value = currentName;
 }

@@ -16,7 +16,17 @@ html, body {
     background: #576BCD;
 }
 
-#block-name {
-    width: 5vw;
-    background: #FF6E64;
+#block-name-field, #block-name-form {
+    display: block;
+    width: 80%;
+    margin: 1vh auto;
+    text-align: center;
+}
+
+#delete-block-button {
+    display: block;
+    float: right;
+    width: 10%;
+    cursor: pointer;
+    margin: 1vh auto;
 }
