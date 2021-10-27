@@ -1,0 +1,22 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+#interactive-field {
+    margin: 5vh 5vw;
+    width: 90vw;
+    height: 90vh;
+    background: lightgray;
+}
+
+#draggable-block {
+    width: 20vw;
+    height: 20vh;
+    background: #576BCD;
+}
+
+#block-name {
+    width: 5vw;
+    background: #FF6E64;
+}
