@@ -1,23 +1,23 @@
 let field = document.querySelector('#interactive-field');
 let savedBlock = localStorage.getItem("block");
+let savedBlockName = localStorage.getItem("block-name-field");
+
+let block = document.querySelector('#draggable-block');
+let deleteBlockButton;
+let nameFieldName = 'test';
 
 const deleteButtonHtml = '<div id="delete-block-button" onclick="deleteBlock()">&#10006;</div>';
 const nameFormHtml = '<from id="block-name-form" style="display: none"><input type="text" id="block-name-field-input">' +
     '<button onclick="submitName()">Submit</button></from>';
-const nameFieldHtml = '<div id="block-name-field" onclick="changeName()">Name</div>';
-const newBlockHtml = '<div id="draggable-block" style="position: absolute">' + deleteButtonHtml + nameFieldHtml + nameFormHtml + '</div>';
-
-let block = document.querySelector('#draggable-block');
-let deleteBlockButton;
-let nameField;
+const newBlockHtml = '<div id="draggable-block" style="position: absolute">' + deleteButtonHtml + '<div id="block-name-field" onclick="changeName()">' + nameFieldName +'</div>' + nameFormHtml + '</div>';
 
 window.onload = () => {
     if (savedBlock != null) {
         field.innerHTML = savedBlock;
+        field.querySelector('#block-name-field').innerHTML = savedBlockName;
         block = document.querySelector('#draggable-block');
         block.style.left = localStorage.getItem("shiftX");
         block.style.top = localStorage.getItem("shiftY");
-        nameField = document.querySelector('#block-name-field');
         deleteBlockButton = document.querySelector('#delete-block-button');
         setBlockQualities();
     }
@@ -114,6 +114,7 @@ function submitName() {
     document.getElementById('block-name-form').style.display = 'none';
     nameField.style.display = 'block';
     nameField.innerText = newName;
+    localStorage.setItem("block-name-field", newName);
 }
 
 function changeName() {
