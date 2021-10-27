@@ -1,8 +1,10 @@
 let field = document.querySelector('#interactive-field');
 let savedBlock = localStorage.getItem("block");
-const newBlock = '<div id="draggable-block" style="position: absolute"><p id="block-name" >Default name</p></div>';
+const deleteButton = '<p id="delete-block-button">&#10006;</p>';
+const newBlock = '<div id="draggable-block" style="position: absolute">' + deleteButton + '<form onsubmit="submitName()"><input type="text"><input type="submit"></form></div>';
 let block = document.querySelector('#draggable-block');
 let nameField = document.querySelector('#block-name');
+let deleteBlockButton =  document.querySelector('#delete-block-button');
 
 window.onload = (e) => {
     if (savedBlock != null) {
@@ -21,6 +23,7 @@ field.addEventListener('dblclick', function (e) {
         field.innerHTML = savedBlock;
         localStorage.setItem("block", newBlock);
         block = document.querySelector('#draggable-block');
+        deleteBlockButton = document.querySelector('#delete-block-button');
         block.style.left = e.pageX + 'px';
         block.style.top = e.pageY + 'px';
         localStorage.setItem("shiftX", block.style.left);
@@ -30,6 +33,14 @@ field.addEventListener('dblclick', function (e) {
 });
 
 function setBlockQualities() {
+    deleteBlockButton.onclick = function () {
+        console.log('puff')
+        localStorage.clear();
+        field.removeChild(block);
+        block = null;
+        savedBlock = null;
+    }
+
 
     block.onmousedown = function(e) {
         const fieldCoords = field.getBoundingClientRect()
@@ -51,10 +62,6 @@ function setBlockQualities() {
             const blockHeight = blockCoords.bottom - blockCoords.top;
 
             blockCoords = getCoords(block);
-
-            console.log(blockCoords)
-            console.log(fieldCoords)
-            console.log(blockHeight)
 
             if (blockCoords.left < fieldCoords.left) {
                 block.style.left = fieldCoords.left + 'px';
@@ -95,4 +102,8 @@ function getCoords(elem) {
         bottom: box.bottom,
         right: box.right
     };
+}
+
+function submitName() {
+    console.log('submit')
 }
